@@ -8,11 +8,11 @@ export default async function handler(
 ) {
     // console.log("ENV PASS:", process.env.YANDEX_SMTP_PASSWORD);
     // console.log("ENV PASS:", process.env.NODE_ENV);
-    if (process.env.NODE_ENV === 'production') {
-      return res.status(403).json({
-        error: 'Отправка заказа недоступна в production'
-      });
-    }
+    // if (process.env.NODE_ENV === 'production') {
+    //   return res.status(403).json({
+    //     error: 'Отправка заказа недоступна в production'
+    //   });
+    // }
 
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Метод не разрешён" });
