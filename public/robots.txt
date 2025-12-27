@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zhenua82.github.io/pitomnick-page/sitemap.xml

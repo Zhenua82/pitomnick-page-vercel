@@ -1,0 +1,53 @@
+/* Кнопка звонка: */
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Центровка внутри контейнера */
+  align-items: center;
+  width: 100%; /* Чтобы контейнер занимал всю ширину секции */
+}
+.phoneButton {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: var(--cnopkaPok);
+  border: 13px solid #fdfffe;      /* мягкий светлый ободок */
+  background-image: url('../public/phone2.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+  cursor: pointer;
+  /* Элегантная тень, как у карточек */
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.08),
+    0 3px 8px rgba(0, 0, 0, 0.05);
+  /* Сглаженная анимация */
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+}
+.phoneButton:hover,
+.phoneButton:active {
+  transform: scale(1.08);
+  /* Чуть более тёмный зелёный */
+  background-color: var(--cnopkaNazh);
+  /* Усиление тени при ховере */
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+  filter: brightness(0.95);
+}
+
+/* =========================================
+   Адаптация кнопки
+========================================= */
+/* Мобильные < 600px */
+@media (max-width: 600px) {
+  .phoneButton {
+    width: 120px;
+    height: 120px;
+    background-size: 55%;
+  }
+}

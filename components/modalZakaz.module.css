@@ -1,0 +1,122 @@
+/* === Checkout modal (centered) === */
+.checkoutOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* окно по центру — компактное и адаптивное */
+.checkoutWindow {
+  width: 100%;
+  max-width: 560px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+  position: relative;
+  max-height: 85vh;
+  overflow: auto;
+}
+
+/* Заголовок и подсказки */
+.checkoutHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.checkoutTitle { font-size: 20px; font-weight: 700; }
+.checkoutCloseBtn {
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+  color: #555;
+}
+
+/* Список товаров в окне */
+.checkoutList {
+  margin: 10px 0 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.checkoutItem {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #fafafa;
+  align-items: center;
+}
+.checkoutItem .meta {
+  display: flex;
+  flex-direction: column;
+}
+.checkoutItem .title { font-weight: 600; }
+.checkoutItem .age { color: #666; font-size: 13px; }
+.checkoutItem .qty { font-weight: 700; color: #222; }
+
+/* Итог */
+.checkoutTotal {
+  margin-top: 12px;
+  text-align: right;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Форма телефона */
+.phoneRow {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.phoneInput {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+.phoneInput:focus {
+  outline: none;
+  border-color: #2f855a;
+  box-shadow: 0 0 0 4px rgba(47,133,90,0.07);
+}
+
+/* Подсказка под полем */
+.helpText {
+  font-size: 13px;
+  color: #555;
+}
+
+/* Кнопка отправить */
+.sendButton {
+  margin-top: 14px;
+  background: #2f855a;
+  color: #fff;
+  border: none;
+  padding: 11px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+.sendButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* мобильная адаптация */
+@media (max-width: 520px) {
+  .checkoutWindow { padding: 14px; max-width: 100%; }
+  .checkoutTitle { font-size: 18px; }
+}

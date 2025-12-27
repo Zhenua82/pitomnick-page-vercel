@@ -1,0 +1,121 @@
+/* Корневой контейнер слайдера */
+.slider {
+  position: relative;
+  margin-top: 20px;
+}
+
+/* Область видимости (обрезает ленту) */
+.viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Лента со слайдами */
+.track {
+  display: flex;
+  /* transition: transform 0.45s ease; */
+  /* transition: animate ? 'transform 0.45s ease' : 'none' */
+  will-change: transform;
+}
+
+/* Один слайд */
+.slide {
+  position: relative;
+  box-sizing: border-box;
+  padding: 0 9px;
+
+  /* Соотношение сторон: ширина 1 / высота 2 */
+  aspect-ratio: 1 / 2;
+}
+
+/* Изображение */
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(15, 81, 50, 0.25);
+}
+
+/* Подпись поверх изображения */
+.caption {
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  bottom: 0;
+
+  padding: 10px 12px;
+  background: linear-gradient(
+    0deg,
+    rgba(15, 81, 50, 0.85),
+    rgba(15, 81, 50, 0.5)
+  );
+
+  color: #ffffff;
+  font-size: 0.9rem;
+
+  border-radius: 0 0 12px 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Кнопки навигации */
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 42px;
+  height: 42px;
+
+  background: rgba(15, 81, 50, 0.75);
+  color: #ffffff;
+
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+
+  font-size: 1.6rem;
+  line-height: 1;
+
+  z-index: 2;
+  transition: background 0.2s ease;
+}
+
+.prev:hover,
+.next:hover {
+  background: rgba(40, 167, 69, 0.9);
+}
+
+.prev {
+  left: -12px;
+}
+
+.next {
+  right: -12px;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 749px) {
+  .slide {
+    padding: 0;
+  }
+
+  .caption {
+    left: 0;
+    right: 0;
+  }
+
+  .prev {
+    left: 8px;
+  }
+
+  .next {
+    right: 8px;
+  }
+}

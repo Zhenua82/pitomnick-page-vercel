@@ -1,0 +1,21 @@
+/* Кнопка "Оформить заказ" */
+.orderButton {
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  color: white;
+
+  /* красивый зелёный */
+  background: var(--cnopkaPok);
+  transition: 0.2s;
+}
+
+.orderButton:hover {
+  background: var(--cnopkaNazh);
+}
+
+
+
+
+

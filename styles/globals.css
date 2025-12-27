@@ -1,0 +1,143 @@
+/* /styles/globals.css - обычный css */
+:root{
+  --bg:#f6f8f9;
+  --card:#ffffff;
+  --accent:#2f855a;
+  --muted:#6b7280;
+  --container:1100px;
+  --podsvetka: #bafcce;
+  --cnopkaPok: #28a745;
+  --cnopkaNazh: #218838;
+}
+
+*{box-sizing:border-box}
+html,body,#__next{height:100%}
+body{
+  margin:0;
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:var(--bg);
+  color:#111827;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+}
+
+.container{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:24px;
+}
+
+/* header */
+.site-header{
+  background:linear-gradient(90deg,#0f5132, #134e4a);
+  /* color:#fff; */
+  padding:12px 0;
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.brand{
+  font-weight:700;
+  font-size:1.25rem;
+  color:white;
+  text-decoration:none;
+}
+.nav a{
+  color:rgba(255,255,255,0.9);
+  margin-left:16px;
+  text-decoration:none;
+  font-weight:500;
+}
+.site-footer{
+  border-top:1px solid rgba(0,0,0,0.05);
+  background:#fff;
+  padding:18px 0;
+  margin-top:48px;
+  color:var(--muted);
+}
+.site-footer .footer-inner{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  align-items:center;
+}
+
+/* buttons (used on plant page) */
+.btn{
+  background:var(--accent);
+  color:white;
+  border:none;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+}
+.btn-ghost{
+  background:transparent;
+  border:1px solid rgba(0,0,0,0.08);
+  color:inherit;
+  padding:9px 12px;
+  margin-left:10px;
+}
+
+/* misc */
+h1,h2,h3{margin:0 0 12px 0}
+p{margin:0 0 12px 0}
+
+h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+}
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+
+
+/* =========================================
+   Адаптация HEADER и FOOTER
+========================================= */
+
+/* Планшеты < 900px */
+@media (max-width: 900px) {
+  .header-inner {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .nav a {
+    margin-left: 12px;
+    font-size: 0.95rem;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+}
+
+/* Мобильные < 600px */
+@media (max-width: 600px) {
+
+  .container {
+    padding: 16px;
+  }
+
+  .brand {
+    font-size: 1.15rem;
+  }
+
+  .nav a {
+    margin-left: 8px;
+    font-size: 0.9rem;
+  }
+
+  .site-footer {
+    margin-top: 28px;
+    padding: 12px 0;
+  }
+}

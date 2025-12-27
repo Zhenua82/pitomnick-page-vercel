@@ -1,0 +1,51 @@
+/* === МОДАЛЬНОЕ ОКНО === */
+.modalWindow {
+  left: auto;
+  bottom: auto;
+  margin: 0;
+  background: #fff;
+  overflow-y: auto;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Кнопка "Оформить заказ" */
+.orderButton {
+  margin-top: 15px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+
+  /* красивый зелёный */
+  background: var(--cnopkaPok);
+  transition: 0.2s;
+}
+
+.orderButton:hover {
+  background: var(--cnopkaNazh);
+}
+.title {
+  font-weight: 700;
+}
+.goCart {
+  color: var(--cnopkaPok);
+  font-size: 28px
+}
+.goCart:hover {
+  color: var(--cnopkaNazh);
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .modalWindow {
+    right: 10px;
+    left: 10px;
+    width: auto;
+  }
+}
