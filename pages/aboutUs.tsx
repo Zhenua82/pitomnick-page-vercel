@@ -51,13 +51,13 @@ const AboutPage: React.FC = () => {
           </ul>
         </article>
         {/* Карта яндекса через api (требует ключа (пароля - https://developer.tech.yandex.ru/services/3) формировать карту: https://yandex.ru/dev/maps/archive/doc/jsapi/2-0/ru/quick-start/): */}
-        {/* <aside className={styles.mapWrapper}>
-          <YandexMap />
-        </aside> */}
-        {/* Карта через конструктор карт яндекса - https://yandex.ru/map-constructor/, не требует ключа или пароля (вставлять в код через iframe, если через javaScript - то ломается верстка) */}
         <aside className={styles.mapWrapper}>
-          <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3Ab7c58a9b190226bc4c3e6b70b9bbe109d1266474714b9c508800e0b168d22e9e&amp;source=constructor" width="100%" height="100%" frameBorder="0"></iframe>
+          <YandexMap />
         </aside>
+        {/* Карта через конструктор карт яндекса - https://yandex.ru/map-constructor/, не требует ключа или пароля (вставлять в код через iframe, если через javaScript - то ломается верстка) */}
+        {/* <aside className={styles.mapWrapper}>
+          <iframe title="map" src="https://yandex.ru/map-widget/v1/?um=constructor%3Ab7c58a9b190226bc4c3e6b70b9bbe109d1266474714b9c508800e0b168d22e9e&amp;source=constructor" width="100%" height="100%" frameBorder="0"></iframe>
+        </aside> */}
       </section>
 
       <section className={styles.info}>
