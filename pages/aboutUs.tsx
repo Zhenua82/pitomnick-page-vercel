@@ -6,8 +6,8 @@ import Head from 'next/head';
 import CartSmall from '@/components/cartSmall';
 import PhoneButton from '@/components/phoneButton';
 import PlantsSlider from '@/components/PlantsSlider';
-
-
+import CommentList from "@/components/CommentList";
+import CommentForm from "@/components/CommentForm";
 
 const AboutPage: React.FC = () => {
   return (
@@ -71,7 +71,10 @@ const AboutPage: React.FC = () => {
         <h3>Наши растения:</h3>
         <PlantsSlider />
       </section>
-
+      <section>
+        <CommentList />
+        <CommentForm />
+      </section>
     </main>
     
     </Layout>

@@ -1,0 +1,70 @@
+.list {
+  max-width: 800px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.item {
+  padding: 16px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.text {
+  margin-bottom: 12px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.actions button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #28a745;
+  color: #fff;
+  font-weight: 600;
+}
+
+.actions button.delete {
+  background: #dc3545;
+}
+
+.loading,
+.empty {
+  text-align: center;
+  margin-top: 40px;
+  color: #666;
+}
+
+.approved {
+  background: linear-gradient(
+    0deg,
+    rgba(40, 167, 69, 0.08),
+    rgba(40, 167, 69, 0.08)
+  );
+  border-left: 4px solid #28a745;
+}
+
+.badge {
+  background: #28a745;
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: 8px;
+}
