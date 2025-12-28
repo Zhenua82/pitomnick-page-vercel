@@ -1,3 +1,4 @@
+// /pages/index.tsx
 import React from 'react';
 import Layout from '../components/Layout';
 import PlantCard from '../components/PlantCard';
@@ -7,15 +8,15 @@ import Head from 'next/head';
 import PhoneButton from '@/components/phoneButton';
 import CartSmall from '@/components/cartSmall';
 
-import { GetServerSideProps } from "next";
-import { supabaseServer } from "@/lib/supabaseServer";
-import type { Plant } from "@/types/plant";
+import { usePlants } from "@/hooks/usePlants";
 
-type Props = {
-  plants: Plant[];
-};
 
-const HomePage: React.FC<Props> = ({ plants }) => {
+
+const HomePage: React.FC = () => {
+  // const items = Object.values(plants);
+  const { plants, loading } = usePlants();
+  // if (loading) return <p>Загрузка...</p>;
+  const items = plants;
   return (
     <Layout>
       <Head>
@@ -31,25 +32,21 @@ const HomePage: React.FC<Props> = ({ plants }) => {
 
       <section>
         <h2>Наши растения:</h2>
-      <div className={styles.grid}>
-        {plants.map((p) => {
-          const adultVariant = p.plant_variants.find(
-            (v) => v.age === "взрослое растение"
-          );
-
-          if (!adultVariant) return null;
-
-          return (
+        <div className={styles.grid}>
+          {items.map((p) => (
+            // const variant = p.plant_variants.find(v => v.age === 'взрослое растение');
             <PlantCard
               key={p.slug}
               slug={p.slug}
               title={p.title}
-              image={adultVariant.photo}
+              // image={p.photo['взрослое растение']}
+              // opisanie={p.opisanie}
+              image={p.plant_variants.find(v => v.age === "взрослое растение")?.photo ?? ""}
               opisanie={p.opisanie ?? ""}
+              
             />
-          );
-        })}
-      </div>
+          ))}
+        </div>
       </section>
 
       <section className={styles.info}>
@@ -71,32 +68,3 @@ const HomePage: React.FC<Props> = ({ plants }) => {
 };
 
 export default HomePage;
-
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
-  const { data, error } = await supabaseServer
-    .from("plants")
-    .select(`
-      id,
-      slug,
-      title,
-      opisanie,
-      podrobnoe_opisanie1,
-      podrobnoe_opisanie2,
-      plant_variants (
-        age,
-        photo,
-        price
-      )
-    `)
-    .order("title");
-
-  if (error) {
-    return { props: { plants: [] } };
-  }
-
-  return {
-    props: {
-      plants: data ?? [],
-    },
-  };
-};
