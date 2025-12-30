@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Layout from '../components/Layout';
 import { RootState } from '../store';
+// import { updateQuantity, removeItem, clearCart, restoreCart } from '../store/cartSlice';
 import { updateQuantity, removeItem, clearCart, restoreCart } from '../store/cartSlice';
 import styles from '../styles/Cart.module.css';
 import Link from 'next/link';

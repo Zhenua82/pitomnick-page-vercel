@@ -54,14 +54,15 @@ export const cartSlice = createSlice({
       const loaded = loadFromLS();
       state.items = loaded.map((item) => {
         const plant = plants[item.slug];
-        if (!plant) return item; 
+        if (!plant) return item; // если растения уже нет — не трогаем
         const ageKey = item.age as keyof typeof plant.cena;
         const newPriceStr = plant.cena[ageKey];
-        if (!newPriceStr) return item; 
+        if (!newPriceStr) return item; // если цена для такого возраста не найдена — не трогаем
+        // Преобразуем "700 рубл" → 700
         const parsed = parseInt(newPriceStr.replace(/\D/g, ""), 10);
         return {
           ...item,
-          price: isNaN(parsed) ? item.price : parsed,
+          price: isNaN(parsed) ? item.price : parsed, // если цена корректная — обновляем
         };
       });
     },

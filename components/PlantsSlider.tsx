@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import Image from 'next/image';
 import styles from './PlantsSlider.module.css';
-import { plants } from '@/data/plants';
+import type { Plant } from "@/types/plant";
 
 type Slide = {
   plantTitle: string;
@@ -8,24 +9,40 @@ type Slide = {
   photo: string;
 };
 
-/* Исключаем взрослые растения */
-const baseSlides: Slide[] = Object.values(plants).flatMap((plant) =>
-  Object.entries(plant.photo)
-    .filter(([age]) => age !== 'взрослое растение')
-    .map(([age, photo]) => ({
-      plantTitle: plant.title,
-      age,
-      photo,
-    }))
-);
+type Props = {
+  plants: Plant[];
+};
 
-const PlantsSlider: React.FC = () => {
+const PlantsSlider: React.FC<Props> = ({ plants }) => {
+  /* =========================
+     BASE SLIDES
+  ========================= */
+
+  const baseSlides: Slide[] = useMemo(() => {
+    return plants.flatMap((plant) =>
+      plant.plant_variants
+        .filter((v) => v.age !== 'взрослое растение')
+        .map((v) => ({
+          plantTitle: plant.title,
+          age: v.age,
+          photo: v.photo,
+        }))
+    );
+  }, [plants]);
+
+  /* =========================
+     STATE
+  ========================= */
+
   const [perView, setPerView] = useState(3);
   const [index, setIndex] = useState(3);
   const [animate, setAnimate] = useState(true);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  /* Адаптив */
+  /* =========================
+     RESPONSIVE
+  ========================= */
+
   useEffect(() => {
     const update = () => {
       const pv = window.innerWidth < 750 ? 1 : 3;
@@ -38,12 +55,22 @@ const PlantsSlider: React.FC = () => {
     return () => window.removeEventListener('resize', update);
   }, []);
 
-  /* Клоны для бесконечности */
+  /* =========================
+     CLONES FOR INFINITE LOOP
+  ========================= */
+
   const slides = useMemo(() => {
+    if (baseSlides.length === 0) return [];
+
     const head = baseSlides.slice(0, perView);
     const tail = baseSlides.slice(-perView);
+
     return [...tail, ...baseSlides, ...head];
-  }, [perView]);
+  }, [baseSlides, perView]);
+
+  /* =========================
+     NAVIGATION
+  ========================= */
 
   const handlePrev = () => {
     if (isAnimating) return;
@@ -69,10 +96,20 @@ const PlantsSlider: React.FC = () => {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         setAnimate(true);
-        setIsAnimating(false); // ← РАЗРЕШАЕМ КЛИКИ
+        setIsAnimating(false);
       });
     });
   };
+
+  /* =========================
+     GUARD
+  ========================= */
+
+  if (slides.length === 0) return null;
+
+  /* =========================
+     RENDER
+  ========================= */
 
   return (
     <div className={styles.slider}>
@@ -91,11 +128,20 @@ const PlantsSlider: React.FC = () => {
               className={styles.slide}
               style={{ flex: `0 0 ${100 / perView}%` }}
             >
-              <img
-                src={slide.photo}
-                alt={`${slide.plantTitle} — ${slide.age}`}
-                loading="lazy"
-              />
+              <div className={styles.imageWrapper}>
+                <Image
+                  src={slide.photo}
+                  alt={`${slide.plantTitle} — ${slide.age}`}
+                  fill
+                  sizes={
+                    perView === 1
+                      ? '100vw'
+                      : '(max-width: 1200px) 33vw, 400px'
+                  }
+                  className={styles.image}
+                />
+              </div>
+
               <div className={styles.caption}>
                 <strong>{slide.plantTitle}</strong>
                 <span>{slide.age}</span>

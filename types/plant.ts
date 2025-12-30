@@ -1,7 +1,8 @@
 export type PlantVariant = {
   age: string;
   photo: string;
-  price: string;
+  // price: string;
+  price: number;
 };
 
 export type Plant = {
