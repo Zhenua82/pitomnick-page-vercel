@@ -82,7 +82,8 @@ const PlantPage: React.FC<Props> = ({ plant }) => {
           age: variant.age,
           title: plant!.title,
           photo: variant.photo,
-          price: variant.price,
+          // price: variant.price,
+          price: parseInt(String(variant.price).replace(/\D/g, ""), 10),
           quantity: newQty,
         })
       );
