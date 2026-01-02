@@ -25,7 +25,7 @@ const HomePage: React.FC<Props> = ({ plants }) => {
         />
       </Head>
       <section className={styles.hero}>
-        <h1>Питомник хвойных растений <span style={{color: 'red'}}>Ветвь: master</span></h1>
+        <h1>Питомник хвойных растений <span style={{color: 'red'}}>Ветвь: master SSRDataPlants</span></h1>
         <p>Короткое приветствие — лучшие саженцы ели, сосны и можжевельника.</p>
       </section>
 
