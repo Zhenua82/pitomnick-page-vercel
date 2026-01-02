@@ -42,6 +42,7 @@ export async function fetchPlants(): Promise<PlantsMap> {
       cena,
     };
   }
+  // console.log(result)
 
   return result;
 }

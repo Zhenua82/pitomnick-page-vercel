@@ -9,7 +9,6 @@ import PlantsSlider from '@/components/PlantsSlider';
 import CommentList from '@/components/CommentList';
 import CommentForm from '@/components/CommentForm';
 import styles from '@/styles/About.module.css';
-
 import { supabaseServer } from '@/lib/supabaseServer';
 import type { Plant } from "@/types/plant";
 

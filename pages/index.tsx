@@ -6,16 +6,25 @@ import styles from '../styles/Home.module.css';
 import Head from 'next/head';
 import PhoneButton from '@/components/phoneButton';
 import CartSmall from '@/components/cartSmall';
-
 import { GetServerSideProps } from "next";
 import { supabaseServer } from "@/lib/supabaseServer";
 import type { Plant } from "@/types/plant";
+
+// import { useAppDispatch } from '@/store/hooks';
+// import React, { useEffect } from 'react';
+// import { loadPlants } from '@/store/plantsSlice';
 
 type Props = {
   plants: Plant[];
 };
 
 const HomePage: React.FC<Props> = ({ plants }) => {
+
+  // const dispatch = useAppDispatch();
+  //   useEffect(() => {
+  //     dispatch(loadPlants());   
+  //   }, [dispatch]);
+
   return (
     <Layout>
       <Head>
@@ -25,7 +34,7 @@ const HomePage: React.FC<Props> = ({ plants }) => {
         />
       </Head>
       <section className={styles.hero}>
-        <h1>Питомник хвойных растений</h1>
+        <h1>Питомник хвойных растений <span style={{color: 'red'}}>Ветвь: get1Data</span></h1>
         <p>Короткое приветствие — лучшие саженцы ели, сосны и можжевельника.</p>
       </section>
 
