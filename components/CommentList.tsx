@@ -16,7 +16,7 @@ const CommentList: React.FC = () => {
     const loadComments = async () => {
       try {
         // const res = await fetch("/api/comments");
-        const res = await fetch("/api/comments?approved=true");
+        const res = await fetch("/api/admin/comments?approved=true");
         const data = await res.json();
         setComments(data);
       } catch {

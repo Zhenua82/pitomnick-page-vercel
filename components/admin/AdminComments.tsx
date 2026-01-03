@@ -18,7 +18,7 @@ const AdminComments: React.FC = () => {
 
     const fetchComments = async () => {
       try {
-        const res = await fetch("/api/comments");
+        const res = await fetch("/api/admin/comments");
         const data = await res.json();
 
         if (!cancelled) {
@@ -41,14 +41,14 @@ const AdminComments: React.FC = () => {
   }, []);
 
   const toggleApprove = async (id: string, approved: boolean) => {
-    await fetch("/api/comments", {
+    await fetch("/api/admin/comments", {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id, approved })
     });
 
     setLoading(true);
-    const res = await fetch("/api/comments");
+    const res = await fetch("/api/admin/comments");
     setComments(await res.json());
     setLoading(false);
   };
@@ -56,10 +56,10 @@ const AdminComments: React.FC = () => {
   const deleteComment = async (id: string) => {
     if (!confirm("Удалить комментарий?")) return;
 
-    await fetch(`/api/comments?id=${id}`, { method: "DELETE" });
+    await fetch(`/api/admin/comments?id=${id}`, { method: "DELETE" });
 
     setLoading(true);
-    const res = await fetch("/api/comments");
+    const res = await fetch("/api/admin/comments");
     setComments(await res.json());
     setLoading(false);
   };
