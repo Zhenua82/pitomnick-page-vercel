@@ -149,24 +149,24 @@ const PlantPage: React.FC<Props> = ({ plant }) => {
                 {/* minus */}
                 <button
                   className={styles.minus}
-                  onMouseDown={() =>
+                  onPointerDown={(e) => {
+                    e.preventDefault();
                     start(() => {
                       setQty((prev) => {
                         const newQty = Math.max(
                           0,
                           (prev[variant.age] || 0) - 1
                         );
-
                         queueMicrotask(() => {
                           updateCart(variant, newQty);
                         });
-
                         return { ...prev, [variant.age]: newQty };
                       });
-                    })
-                  }
-                  onMouseUp={stop}
-                  onMouseLeave={stop}
+                    });
+                  }}
+                  onPointerUp={stop}
+                  onPointerLeave={stop}
+                  onPointerCancel={stop}
                 >
                   −
                 </button>
@@ -176,18 +176,17 @@ const PlantPage: React.FC<Props> = ({ plant }) => {
                 {/* plus */}
                 <button
                   className={styles.plus}
-                  onMouseDown={() =>
+                  onPointerDown={(e) => {
+                    e.preventDefault();
                     start(() => {
                       setQty((prev) => {
                         const newQty = Math.min(
                           1000,
                           (prev[variant.age] || 0) + 1
                         );
-
                         queueMicrotask(() => {
                           updateCart(variant, newQty);
                         });
-
                         setAdded((p) => ({
                           ...p,
                           [variant.age]: true,
@@ -198,13 +197,13 @@ const PlantPage: React.FC<Props> = ({ plant }) => {
                             [variant.age]: false,
                           }));
                         }, 800);
-
                         return { ...prev, [variant.age]: newQty };
                       });
-                    })
-                  }
-                  onMouseUp={stop}
-                  onMouseLeave={stop}
+                    });
+                  }}
+                  onPointerUp={stop}
+                  onPointerLeave={stop}
+                  onPointerCancel={stop}
                 >
                   +
                 </button>

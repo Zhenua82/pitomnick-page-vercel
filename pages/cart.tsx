@@ -6,7 +6,8 @@ import { updateQuantity, removeItem, clearCart, restoreCart } from '../store/car
 import styles from '../styles/Cart.module.css';
 import Link from 'next/link';
 //Зажатие кнопок добавления и убавления товара:
-import { useHoldButton } from "@/hooks/useHoldButton";
+// import { useHoldButton } from "@/hooks/useHoldButton";
+import { useHoldButton2 } from "@/hooks/useHoldButton2";
 import { store } from "@/store";
 import Head from 'next/head';
 import Image from "next/image";
@@ -33,7 +34,7 @@ const CartPage: React.FC = () => {
   const total = items.reduce((sum, item) => sum + item.quantity * item.price, 0);
 
   //Зажатие кнопок добавления и убавления товара:
-  const { start: startHold, stop: stopHold } = useHoldButton();
+  const { start: startHold, stop: stopHold } = useHoldButton2();
 
   //Переход на главную страницу:
   const perehodGlavn = useNavigateToMain();
@@ -74,14 +75,17 @@ const CartPage: React.FC = () => {
                     Цена: <strong>{item.price} ₽</strong>
                   </p>
 
-                  <div className={styles.qtyRow}>
+                  <div className={styles.qtyRow}>  
                     <button
-                      onMouseDown={() =>
+                      onPointerDown={(e) => {
+                        e.preventDefault();
                         startHold(() => {
-                          const current = store.getState().cart.items.find(
-                            i => i.slug === item.slug && i.age === item.age
-                          )?.quantity ?? 0;
-
+                          const current =
+                            store
+                              .getState()
+                              .cart.items.find(
+                                i => i.slug === item.slug && i.age === item.age
+                              )?.quantity ?? 0;
                           dispatch(
                             updateQuantity({
                               slug: item.slug,
@@ -89,34 +93,27 @@ const CartPage: React.FC = () => {
                               qty: Math.max(0, current - 1),
                             })
                           );
-                        })
-                      }
-
-                      onMouseUp={stopHold}
-                      onMouseLeave={stopHold}
-                      onTouchStart={() =>
-                        startHold(() =>
-                          dispatch(
-                            updateQuantity({
-                              slug: item.slug,
-                              age: item.age,
-                              qty: Math.max(0, item.quantity - 1),
-                            })
-                          )
-                        )
-                      }
-                      onTouchEnd={stopHold}
+                        });
+                      }}
+                      onPointerUp={stopHold}
+                      onPointerLeave={stopHold}
+                      onPointerCancel={stopHold}
                     >
                       −
                     </button>
-                    <span>{item.quantity}</span>
-                    <button
-                      onMouseDown={() =>
-                        startHold(() => {
-                          const current = store.getState().cart.items.find(
-                            i => i.slug === item.slug && i.age === item.age
-                          )?.quantity ?? 0;
 
+                    <span>{item.quantity}</span>
+            
+                    <button
+                      onPointerDown={(e) => {
+                        e.preventDefault();
+                        startHold(() => {
+                          const current =
+                            store
+                              .getState()
+                              .cart.items.find(
+                                i => i.slug === item.slug && i.age === item.age
+                              )?.quantity ?? 0;
                           dispatch(
                             updateQuantity({
                               slug: item.slug,
@@ -124,22 +121,11 @@ const CartPage: React.FC = () => {
                               qty: Math.min(1000, current + 1),
                             })
                           );
-                        })
-                      }
-                      onMouseUp={stopHold}
-                      onMouseLeave={stopHold}
-                      onTouchStart={() =>
-                        startHold(() =>
-                          dispatch(
-                            updateQuantity({
-                              slug: item.slug,
-                              age: item.age,
-                              qty: Math.min(1000, item.quantity + 1),
-                            })
-                          )
-                        )
-                      }
-                      onTouchEnd={stopHold}
+                        });
+                      }}
+                      onPointerUp={stopHold}
+                      onPointerLeave={stopHold}
+                      onPointerCancel={stopHold}
                     >
                       +
                     </button>

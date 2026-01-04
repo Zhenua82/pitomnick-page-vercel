@@ -1,26 +1,25 @@
-// hooks/useHoldButton2.ts
-import { useRef, useCallback } from "react";
+import { useCallback, useRef } from "react";
 
-export function useHoldButton2(delay = 500, interval = 80) {
-  // useRef должен иметь начальное значение null
+// hooks/useHoldButton2.ts
+export function useHoldButton2(delay = 400, interval = 80) {
   const timeoutRef = useRef<number | null>(null);
   const intervalRef = useRef<number | null>(null);
-  const savedAction = useRef<(() => void) | null>(null);
-  const start = useCallback(
-    (action: () => void) => {
-      savedAction.current = action;
-      // Выполнить один раз сразу
-      action();
-      // Таймаут перед интервалом
-      timeoutRef.current = window.setTimeout(() => {
-        intervalRef.current = window.setInterval(() => {
-          savedAction.current?.();
-        }, interval);
-      }, delay);
-    },
-    [delay, interval] // включаем все используемые переменные
-  );
+  const activeRef = useRef(false);
+
+  const start = useCallback((action: () => void) => {
+    if (activeRef.current) return;
+    activeRef.current = true;
+
+    action();
+
+    timeoutRef.current = window.setTimeout(() => {
+      intervalRef.current = window.setInterval(action, interval);
+    }, delay);
+  }, [delay, interval]);
+
   const stop = useCallback(() => {
+    activeRef.current = false;
+
     if (timeoutRef.current !== null) {
       clearTimeout(timeoutRef.current);
       timeoutRef.current = null;
@@ -30,5 +29,8 @@ export function useHoldButton2(delay = 500, interval = 80) {
       intervalRef.current = null;
     }
   }, []);
+
   return { start, stop };
 }
+
+

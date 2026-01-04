@@ -32,7 +32,7 @@ export default function PlantEditor({ plant, onChange }: Props) {
 
   return (
     <div style={{ border: "1px solid #ccc", marginTop: 16, padding: 16 }}>
-      <input
+      <input style={{ width: '20%' }}
         value={form.title}
         onChange={(e) => setForm({ ...form, title: e.target.value })}
         placeholder="Название"
@@ -44,13 +44,13 @@ export default function PlantEditor({ plant, onChange }: Props) {
         placeholder="slug"
       />
 
-      <textarea
+      <textarea style={{ width: '20%', height: '200px' }}
         value={form.opisanie ?? ""}
         onChange={(e) => setForm({ ...form, opisanie: e.target.value })}
         placeholder="Описание"
       />
 
-      <textarea
+      <textarea style={{ width: '20%', height: '200px' }}
         value={form.podrobnoe_opisanie1 ?? ""}
         onChange={(e) =>
           setForm({ ...form, podrobnoe_opisanie1: e.target.value })
@@ -58,7 +58,7 @@ export default function PlantEditor({ plant, onChange }: Props) {
         placeholder="Подробное описание 1"
       />
 
-      <textarea
+      <textarea style={{ width: '20%', height: '200px'}}
         value={form.podrobnoe_opisanie2 ?? ""}
         onChange={(e) =>
           setForm({ ...form, podrobnoe_opisanie2: e.target.value })
