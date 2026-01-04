@@ -44,6 +44,8 @@
 .text {
   line-height: 1.5;
   color: #0f5132;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .loading {

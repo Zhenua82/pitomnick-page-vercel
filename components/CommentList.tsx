@@ -50,7 +50,6 @@ const CommentList: React.FC = () => {
                 {new Date(comment.created_at).toLocaleDateString("ru-RU")}
               </span>
             </div>
-
             <p className={styles.text}>{comment.text}</p>
           </li>
         ))}

@@ -45,7 +45,8 @@ const PlantsSlider: React.FC<Props> = ({ plants }) => {
 
   useEffect(() => {
     const update = () => {
-      const pv = window.innerWidth < 750 ? 1 : 3;
+      // const pv = window.innerWidth < 750 ? 1 : 3;
+      const pv = window.innerWidth < 576 ? 1 : 3;
       setPerView(pv);
       setIndex(pv);
     };
