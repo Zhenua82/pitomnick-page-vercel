@@ -39,7 +39,7 @@ const HomePage: React.FC<Props> = ({ plants }) => {
       </section>
 
       <section>
-        <h2>Наши растения:</h2>
+        <h2 className={styles.h2}>Наши растения:</h2>
       <div className={styles.grid}>
         {plants.map((p) => {
           const adultVariant = p.plant_variants.find(
@@ -63,7 +63,7 @@ const HomePage: React.FC<Props> = ({ plants }) => {
 
       <section className={styles.info}>
         <div>
-          <h2>Почему мы</h2>
+          <h2 className={styles.h2}>Почему мы</h2>
           <ul>
             <li>Качественные саженцы</li>
             <li>Доставка и консультации по посадке</li>

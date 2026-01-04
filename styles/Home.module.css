@@ -87,6 +87,12 @@
   .hero {
     padding: 18px;
   }
+  .hero h1 {
+    font-size: 20px;
+  }
+  .h2{
+    font-size: 18px;
+  }
 
   .grid {
     grid-template-columns: 1fr; /* карточки в 1 колонку */
@@ -101,5 +107,8 @@
   }
   .info{
   flex-direction: column;
-}
+  }
+  .cardLink h3{
+    font-size: 16px;
+  }
 }
