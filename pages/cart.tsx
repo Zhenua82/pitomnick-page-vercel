@@ -76,6 +76,7 @@ const CartPage: React.FC = () => {
                   </p>
 
                   <div className={styles.qtyRow}>  
+                    
                      {/* minus */}
                     <button
                       onPointerDown={(e) => {
@@ -104,6 +105,7 @@ const CartPage: React.FC = () => {
                     </button>
 
                     <span>{item.quantity}</span>
+
                       {/* plus */}
                     <button
                       onPointerDown={(e) => {
