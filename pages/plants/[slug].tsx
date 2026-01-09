@@ -11,7 +11,9 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "@/store/cartSlice";
 import { RootState } from "@/store";
-import { useHoldButton2 } from "@/hooks/useHoldButton2";
+//Зажатие кнопок добавления и убавления товара:
+import { QtyControl } from "@/hooks/QtyControl";
+
 import Head from "next/head";
 import CartSmall from "@/components/cartSmall";
 import PhoneButton from "@/components/phoneButton";
@@ -31,7 +33,6 @@ type Props = {
 const PlantPage: React.FC<Props> = ({ plant }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  const { start, stop } = useHoldButton2();
   const [qty, setQty] = useState<Record<string, number>>({});
   const [added, setAdded] = useState<Record<string, boolean>>({});
 
@@ -146,73 +147,37 @@ const PlantPage: React.FC<Props> = ({ plant }) => {
                   </div>
                 </figcaption>
 
-                {/* minus */}
-                <button
-                  className={styles.minus}
-                  onPointerDown={(e) => {
-                    e.preventDefault();
-                    start(() => {
-                      setQty((prev) => {
-                        const newQty = Math.max(
-                          0,
-                          (prev[variant.age] || 0) - 1
-                        );
-                        queueMicrotask(() => {
-                          updateCart(variant, newQty);
-                        });
-                        return { ...prev, [variant.age]: newQty };
+                {/* Кнопки "-" и "+": */}
+                <div className={styles.wrapbutton}>
+                <QtyControl
+                  onChange={(delta) => {
+                    setQty((prev) => {
+                      const newQty = Math.min(
+                        1000,
+                        Math.max(0, (prev[variant.age] || 0) + delta)
+                      );
+                      queueMicrotask(() => {
+                        updateCart(variant, newQty);
                       });
-                    });
-                  }}
-                  onPointerUp={stop}
-                  onPointerLeave={stop}
-                  onPointerCancel={stop}
-                >
-                  −
-                </button>
-
-                <span>{currentQty}</span>
-
-                {/* plus */}
-                <button
-                  className={styles.plus}
-                  onPointerDown={(e) => {
-                    e.preventDefault();
-                    start(() => {
-                      setQty((prev) => {
-                        const newQty = Math.min(
-                          1000,
-                          (prev[variant.age] || 0) + 1
-                        );
-                        queueMicrotask(() => {
-                          updateCart(variant, newQty);
-                        });
-                        setAdded((p) => ({
-                          ...p,
-                          [variant.age]: true,
-                        }));
+                      if (delta > 0) {
+                        setAdded((p) => ({ ...p, [variant.age]: true }));
                         setTimeout(() => {
-                          setAdded((p) => ({
-                            ...p,
-                            [variant.age]: false,
-                          }));
+                          setAdded((p) => ({ ...p, [variant.age]: false }));
                         }, 800);
-                        return { ...prev, [variant.age]: newQty };
-                      });
+                      }
+                      return { ...prev, [variant.age]: newQty };
                     });
                   }}
-                  onPointerUp={stop}
-                  onPointerLeave={stop}
-                  onPointerCancel={stop}
                 >
-                  +
-                </button>
-
+                  <span>{currentQty}</span>
+                </QtyControl> 
+                </div>            
                 {added[variant.age] && (
                   <div className={styles.addedFloating}>
                     Добавлено!
                   </div>
                 )}
+
               </figure>
             );
           })}

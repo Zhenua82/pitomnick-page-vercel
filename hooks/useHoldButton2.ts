@@ -32,5 +32,3 @@ export function useHoldButton2(delay = 400, interval = 80) {
 
   return { start, stop };
 }
-
-

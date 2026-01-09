@@ -6,8 +6,7 @@ import { updateQuantity, removeItem, clearCart, restoreCart } from '../store/car
 import styles from '../styles/Cart.module.css';
 import Link from 'next/link';
 //Зажатие кнопок добавления и убавления товара:
-// import { useHoldButton } from "@/hooks/useHoldButton";
-import { useHoldButton2 } from "@/hooks/useHoldButton2";
+import { QtyControl } from "@/hooks/QtyControl";
 import { store } from "@/store";
 import Head from 'next/head';
 import Image from "next/image";
@@ -32,9 +31,6 @@ const CartPage: React.FC = () => {
   }, [dispatch]);
 
   const total = items.reduce((sum, item) => sum + item.quantity * item.price, 0);
-
-  //Зажатие кнопок добавления и убавления товара:
-  const { start: startHold, stop: stopHold } = useHoldButton2();
 
   //Переход на главную страницу:
   const perehodGlavn = useNavigateToMain();
@@ -61,8 +57,7 @@ const CartPage: React.FC = () => {
                                   src={item.photo}
                                   alt={`${item.title} — ${item.age}`}
                                   width={300}
-                                  height={400}
-                                  // priority={item.age === item.age} 
+                                  height={400}             
                                   priority={false}
                                   className={styles.photo}
                                 />
@@ -75,61 +70,30 @@ const CartPage: React.FC = () => {
                     Цена: <strong>{item.price} ₽</strong>
                   </p>
 
-                  <div className={styles.qtyRow}>  
-                     {/* minus */}
-                    <button
-                      onPointerDown={(e) => {
-                        e.preventDefault();
-                        startHold(() => {
-                          const current =
-                            store
-                              .getState()
-                              .cart.items.find(
-                                i => i.slug === item.slug && i.age === item.age
-                              )?.quantity ?? 0;
-                          dispatch(
-                            updateQuantity({
-                              slug: item.slug,
-                              age: item.age,
-                              qty: Math.max(0, current - 1),
-                            })
-                          );
-                        });
-                      }}
-                      onPointerUp={stopHold}
-                      onPointerLeave={stopHold}
-                      onPointerCancel={stopHold}
-                    >
-                      −
-                    </button>
+                  <div className={styles.qtyRow}>
+                    {/* Кнопки "-" и "+": */}
+                    <QtyControl
+                      onChange={(delta) => {
+                        const current =
+                          store
+                            .getState()
+                            .cart.items.find(
+                              i => i.slug === item.slug && i.age === item.age
+                            )?.quantity ?? 0;
 
-                    <span>{item.quantity}</span>
-                      {/* plus */}
-                    <button
-                      onPointerDown={(e) => {
-                        e.preventDefault();
-                        startHold(() => {
-                          const current =
-                            store
-                              .getState()
-                              .cart.items.find(
-                                i => i.slug === item.slug && i.age === item.age
-                              )?.quantity ?? 0;
-                          dispatch(
-                            updateQuantity({
-                              slug: item.slug,
-                              age: item.age,
-                              qty: Math.min(1000, current + 1),
-                            })
-                          );
-                        });
+                        const newQty = Math.min(1000, Math.max(0, current + delta));
+
+                        dispatch(
+                          updateQuantity({
+                            slug: item.slug,
+                            age: item.age,
+                            qty: newQty,
+                          })
+                        );
                       }}
-                      onPointerUp={stopHold}
-                      onPointerLeave={stopHold}
-                      onPointerCancel={stopHold}
                     >
-                      +
-                    </button>
+                      <span>{item.quantity}</span>
+                    </QtyControl>
                   </div>
 
                   <p className={styles.subtotal}>
