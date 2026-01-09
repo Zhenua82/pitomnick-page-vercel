@@ -76,6 +76,7 @@ const CartPage: React.FC = () => {
                   </p>
 
                   <div className={styles.qtyRow}>  
+                     {/* minus */}
                     <button
                       onPointerDown={(e) => {
                         e.preventDefault();
@@ -103,7 +104,7 @@ const CartPage: React.FC = () => {
                     </button>
 
                     <span>{item.quantity}</span>
-            
+                      {/* plus */}
                     <button
                       onPointerDown={(e) => {
                         e.preventDefault();
