@@ -25,7 +25,7 @@ const HomePage: React.FC<Props> = ({ plants }) => {
         />
       </Head>
       <section className={styles.hero}>
-        <h1>Питомник хвойных растений <span style={{color: 'red'}}>Ветвь: SSRDataPlants</span></h1>
+        <h1>Питомник хвойных растений</h1><span style={{color: 'red'}}> Pages Router (fixData + Supabase)</span>
         <p>Короткое приветствие — лучшие саженцы ели, сосны и можжевельника.</p>
       </section>
 
