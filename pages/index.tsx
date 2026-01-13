@@ -34,7 +34,7 @@ const HomePage: React.FC<Props> = ({ plants }) => {
         />
       </Head>
       <section className={styles.hero}>
-        <h1>Питомник хвойных растений</h1>
+        <h1>Питомник хвойных растений</h1><span style={{color: 'red'}}> Pages Router (button in component)</span>
         <p>Короткое приветствие — лучшие саженцы ели, сосны и можжевельника.</p>
       </section>
 
